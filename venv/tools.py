@@ -62,7 +62,7 @@ passengers = data['Name'].count()
 #
 # # 6 task
 print('TASK 6\n')
-
+print('For new commit')
 
 # 7 task
 print('TASK TREE\n')
