@@ -1,4 +1,6 @@
 import pandas as pd
+import numpy as np
+from sklearn.tree import DecisionTreeClassifier
 
 data = pd.read_csv('titanic.csv', index_col='PassengerId')
 passengers = data['Name'].count()
@@ -62,25 +64,48 @@ passengers = data['Name'].count()
 #
 # # 6 task
 print('TASK 6\n')
-print('For new commit')
-print('For new commit')
+data = pd.read_csv('titanic.csv', index_col='PassengerId')
+name = data[['Name','Sex','Age']]
+name = name[name['Sex'] != 'male']
+name = name['Name']
+new_name = name.str.split(', ',expand=True)
+#new_name2 = new_namestr.split('(',expand=True)
+#print(new_name)
+#print(type(name))
+#print (type(new_name))
+new_name = new_name.rename(columns={0:'Second name',1:'Name'})
+new_name = new_name['Name']
+new_name = new_name.str.split('(',expand=True)
+#print (new_name.columns)
+print (new_name)
+print (type(new_name))
+#print (new_name.index)
+#new_name = new_name['1']
+#print (type(new_name))
+#print (new_name.head)
+first_part = new_name[0]
+second_part = new_name[1]
+third_part = new_name[2]
+print (first_part)
+print (second_part)
+
+#second_part.to_csv('female_names.txt')
 
 # 7 task
-print('TASK TREE\n')
-import numpy as np
-from sklearn.tree import DecisionTreeClassifier
-data = data[['Pclass','Fare','Age','Sex','Survived']]
-data['Sex'] = data['Sex'].str.replace('female','1')
-data['Sex'] = data['Sex'].str.replace('male','0')
-data = data.dropna()
-y = np.array(data['Survived'])
-data = data[['Pclass','Fare','Age','Sex']]
-X = data.to_numpy()
-clf = DecisionTreeClassifier(random_state=241)
-clf.fit(X, y)
-importances = clf.feature_importances_
-print(importances)
-# np.isnan(X)
-file_tree = open('tree.txt','w')
-file_tree.write('Fare Sex')
-file_tree.close()
+# print('TASK TREE\n')
+# data = pd.read_csv('titanic.csv', index_col='PassengerId')
+# data = data[['Pclass','Fare','Age','Sex','Survived']]
+# data['Sex'] = data['Sex'].str.replace('female','1')
+# data['Sex'] = data['Sex'].str.replace('male','0')
+# data = data.dropna()
+# y = np.array(data['Survived'])
+# data = data[['Pclass','Fare','Age','Sex']]
+# X = data.to_numpy()
+# clf = DecisionTreeClassifier(random_state=241)
+# clf.fit(X, y)
+# importances = clf.feature_importances_
+# print(importances)
+# # np.isnan(X)
+# file_tree = open('tree.txt','w')
+# file_tree.write('Fare Sex')
+# file_tree.close()
